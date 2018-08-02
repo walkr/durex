@@ -45,11 +45,11 @@ defmodule Durex do
 
   @type duration :: bitstring
 
-  defmacro s_to_ms(s), do: quote(do: 1_000 * unquote(s))
-  defmacro m_to_ms(m), do: quote(do: 1_000 * 60 * unquote(m))
-  defmacro h_to_ms(h), do: quote(do: 1_000 * 60 * 60 * unquote(h))
-  defmacro d_to_ms(d), do: quote(do: 1_000 * 60 * 60 * 24 * unquote(d))
-  defmacro w_to_ms(w), do: quote(do: 1_000 * 60 * 60 * 24 * 7 * unquote(w))
+  defmacrop s_to_ms(s), do: quote(do: 1_000 * unquote(s))
+  defmacrop m_to_ms(m), do: quote(do: 1_000 * 60 * unquote(m))
+  defmacrop h_to_ms(h), do: quote(do: 1_000 * 60 * 60 * unquote(h))
+  defmacrop d_to_ms(d), do: quote(do: 1_000 * 60 * 60 * 24 * unquote(d))
+  defmacrop w_to_ms(w), do: quote(do: 1_000 * 60 * 60 * 24 * 7 * unquote(w))
 
   @doc """
   Parse duration as milliseconds
