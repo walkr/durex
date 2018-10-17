@@ -31,6 +31,7 @@ defmodule Durex do
     * `s` (for second)
     * `m` (for minute)
     * `h` (for hour)
+    * `d` (for days)
     * `w` (for week)
 
   #### Performance Notes
