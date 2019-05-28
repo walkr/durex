@@ -19,11 +19,11 @@ end
 
 ```elixir
 # Success
-{:ok, 1_000} = Durex.parse("1s")
-{:ok, 500} = Durex.parse("0.5s")
+{:ok, 1_000} = Durex.ms("1s")
+{:ok, 500} = Durex.ms("0.5s")
 
 # Error
-:error = Durex.parse("bla")
+:error = Durex.ms("bla")
 ```
 
 MIT License
