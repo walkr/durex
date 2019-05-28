@@ -4,28 +4,28 @@ defmodule Durex do
 
   ## Examples
 
-      iex>Durex.parse "3s"
+      iex>Durex.ms "3s"
       {:ok, 3_000}
 
-      iex>Durex.parse "1h"
+      iex>Durex.ms "1h"
       {:ok, 3600_000}
 
       # Works with float too
-      iex>Durex.parse "0.5s"
+      iex>Durex.ms "0.5s"
       {:ok, 500}
 
-      iex>Durex.parse "1.5h"
+      iex>Durex.ms "1.5h"
       {:ok, 5400_000}
 
-      # Cannot parse duration less than 1ms | 1.0ms
-      iex>Durex.parse "0.5ms"
+      # Cannot ms duration less than 1ms | 1.0ms
+      iex>Durex.ms "0.5ms"
       :error
 
       # Fractional durations in ms will be truncated
-      iex>Durex.parse "1.5ms"
+      iex>Durex.ms "1.5ms"
       {:ok, 1}
 
-  #### Supported intervals
+  #### Supported units
 
     * `ms` (for millisecond)
     * `s` (for second)
@@ -40,7 +40,7 @@ defmodule Durex do
       than their version containing floats.
       So instead of parsing "0.5s", use "500ms" for maximum performance.
 
-    * To benchmark, run: `$ mix run bench/parse.exs`
+    * To benchmark, run: `$ mix run bench/ms.exs`
 
   """
 
@@ -52,11 +52,9 @@ defmodule Durex do
   defmacrop d_to_ms(d), do: quote(do: 1_000 * 60 * 60 * 24 * unquote(d))
   defmacrop w_to_ms(w), do: quote(do: 1_000 * 60 * 60 * 24 * 7 * unquote(w))
 
-  @doc """
-  Parse duration as milliseconds
-  """
-  @spec parse(duration) :: {:ok, pos_integer} | :error
-  def parse(duration) when is_bitstring(duration) do
+  @doc "Parse duration as milliseconds"
+  @spec ms(duration) :: {:ok, pos_integer} | :error
+  def ms(duration) when is_bitstring(duration) do
     case Integer.parse(duration) do
       {ms, "ms"} when ms >= 1 ->
         {:ok, ms}
@@ -90,11 +88,21 @@ defmodule Durex do
   end
 
   @doc "Parse duration but raise if it fails"
-  @spec parse!(duration) :: pos_integer
-  def parse!(duration) do
-    case parse(duration) do
+  @spec ms!(duration) :: pos_integer
+  def ms!(duration) do
+    case ms(duration) do
       {:ok, ms} -> ms
       :error -> raise ArgumentError, "cannot parse #{inspect(duration)}"
     end
   end
+
+  @doc "Parse duration as milliseconds"
+  @deprecated "Use ms/1 instead"
+  @spec parse(duration) :: {:ok, pos_integer} | :error
+  def parse(duration), do: ms(duration)
+
+  @doc "Parse duration but raise if it fails"
+  @deprecated "Use ms!/1 instead"
+  @spec parse!(duration) :: pos_integer
+  def parse!(duration), do: ms!(duration)
 end
