@@ -24,9 +24,9 @@ defmodule Durex.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:dialyxir, "~> 0.5", only: [:dev], runtime: false},
-      {:ex_doc, "~> 0.19", only: :dev},
-      {:benchee, "~> 0.13", only: :dev}
+      {:dialyxir, "~> 1.1", only: [:dev], runtime: false},
+      {:ex_doc, "~> 0.27", only: :dev},
+      {:benchee, "~> 1.0", only: :dev}
     ]
   end
 

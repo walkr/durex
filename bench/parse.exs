@@ -12,6 +12,5 @@ Benchee.run(
   warmup: 0,
   time: 1,
   parallel: 1,
-  formatter_options: %{console: %{extended_statistics: false}},
   print: %{configuration: false, fast_warning: false}
 )
