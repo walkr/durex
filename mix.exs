@@ -33,7 +33,7 @@ defmodule Durex.MixProject do
   defp package do
     [
       name: "durex",
-      licenses: ["MIT License"],
+      licenses: ["MIT"],
       links: %{"GitHub" => "https://github.com/walkr/durex"},
       files: ["lib", "mix.exs", "README*", "LICENSE*"]
     ]
