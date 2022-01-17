@@ -1,5 +1,13 @@
 # Changelog for Durex
 
+## v0.3.0
+
+### Removed
+
+* `Durex.parse/1` - Use `Durex.ms/1` insted
+* `Durex.parse!/1` - Use `Durex.ms!/1` insted
+
+
 ## v0.2.0
 
 ### Additions

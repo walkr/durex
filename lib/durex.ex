@@ -1,29 +1,42 @@
 defmodule Durex do
   @moduledoc """
-  Parse durations, such as `"1s"`, to its numerical millisecond value, e.g. `1_000`.
+  Parse durations, such as `"1s"`, to its numerical millisecond value, e.g. `1_000`,
+  so you can do things such as:
+
+  ```
+  "1s"
+  |> Durex.ms!()
+  |> Process.sleep()
+  ```
 
   ## Examples
 
-      iex>Durex.ms "3s"
+      iex> Durex.ms "3s"
       {:ok, 3_000}
 
-      iex>Durex.ms "1h"
+      iex> Durex.ms "1h"
       {:ok, 3600_000}
 
       # Works with float too
-      iex>Durex.ms "0.5s"
+      iex> Durex.ms "0.5s"
       {:ok, 500}
 
-      iex>Durex.ms "1.5h"
+      iex> Durex.ms "1.5h"
       {:ok, 5400_000}
 
       # Cannot ms duration less than 1ms | 1.0ms
-      iex>Durex.ms "0.5ms"
+      iex> Durex.ms "0.5ms"
       :error
 
       # Fractional durations in ms will be truncated
-      iex>Durex.ms "1.5ms"
+      iex> Durex.ms "1.5ms"
       {:ok, 1}
+
+  Of course, there is also the bang version `ms!/1`:
+
+      # Bang version available
+      iex> Durex.ms! "3s"
+      3_000
 
   #### Supported units
 
@@ -95,14 +108,4 @@ defmodule Durex do
       :error -> raise ArgumentError, "cannot parse #{inspect(duration)}"
     end
   end
-
-  @doc "Parse duration as milliseconds"
-  @deprecated "Use ms/1 instead"
-  @spec parse(duration) :: {:ok, pos_integer} | :error
-  def parse(duration), do: ms(duration)
-
-  @doc "Parse duration but raise if it fails"
-  @deprecated "Use ms!/1 instead"
-  @spec parse!(duration) :: pos_integer
-  def parse!(duration), do: ms!(duration)
 end

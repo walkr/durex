@@ -21,6 +21,7 @@ end
 # Success
 {:ok, 1_000} = Durex.ms("1s")
 {:ok, 500} = Durex.ms("0.5s")
+500 = Durex.ms!("0.5s")
 
 # Error
 :error = Durex.ms("bla")

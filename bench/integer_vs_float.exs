@@ -3,10 +3,10 @@
 Benchee.run(
   %{
     "parse duration with float  " => fn ->
-      {:ok, 500} = Durex.parse("0.5s")
+      {:ok, 500} = Durex.ms("0.5s")
     end,
     "parse duration with integer" => fn ->
-      {:ok, 1_000} = Durex.parse("1s")
+      {:ok, 1_000} = Durex.ms("1s")
     end
   },
   warmup: 0,
